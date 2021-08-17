@@ -1,177 +1,213 @@
-<!doctype html>
-<html lang="zh-cn">
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
 	<meta name="generator" content="Hugo 0.84.1" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Boomsi&#39;s Blog</title><link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/images/favicons/manifest.json">
-<link rel="icon" href="/images/favicons/favicon.ico">
-<meta name="keywords" content="Blog, Front end, JavaScript, Nodejs" />
-<meta name="description" content="A simple blog for front end developer" /><meta itemprop="name" content="Boomsi&#39;s Blog">
-<meta itemprop="description" content="A simple blog for front end developer"><meta property="og:title" content="Boomsi&#39;s Blog" />
-<meta property="og:description" content="A simple blog for front end developer" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/" />
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="boomsi ">
+<meta name="description" content="" />
+<meta name="keywords" content="JavaScript,React,Nodejs,Vue,blog,博客,python,小程序,前端" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://boomsi.github.io/" />
 
+
+    <title>
+        
+            Boomsi&#39;s blog  — Just a blog for front end developer~ 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css"> 
+
+
+
+
+<link rel="stylesheet" href="/main.84402cd12921d1b0fa95044e55bb7ff4b91053aee0ccb40e524c903bbbdb8726.css">
+
+
+  
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Boomsi&#39;s blog">
+<meta itemprop="description" content="Front-end engineers interested in hackers.">
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Boomsi&#39;s Blog"/>
-<meta name="twitter:description" content="A simple blog for front end developer"/>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Boomsi's Blog" /><meta data-name="palette" content="blue"><link rel=stylesheet href="/css/bundle.min.7fa8002b01318588e1a082caef7dabcfccda323105ea2595e776667563f7e243.css" integrity="sha256-f6gAKwExhYjhoILK732rz8zaMjEF6iWV53ZmdWP34kM=" crossorigin="anonymous"><script src="/js/bundle.min.e32615bc744413570374d5b28e8c02ec03c7b28c31485b6fcc5b6174a08766d9.js" integrity="sha256-4yYVvHREE1cDdNWyjowC7APHsowxSFtvzFthdKCHZtk=" crossorigin="anonymous"></script>
-</head><body><header><nav class="navbar navbar-expand-xl fixed-top">
-  <div class="container">
-    <a class="navbar-brand active" href="/">
-      <img class="logo" alt="Logo" src="/images/logo.webp" loading="lazy">BOOTSTRAP</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-1 mb-2 mb-lg-0"><form class="search-bar d-flex ms-1" action="/search">
-  <div class="input-group input-group-sm">
-    <button class="btn btn-search disabled position-absolute left-0" type="submit"><i class="fas fa-fw fa-search"></i></button>
-    <input class="form-control rounded-pill" id="searchQuery" name="q" type="search" aria-label="Search">
-  </div>
-</form></ul><ul class="navbar-nav me-1 mb-2 mb-lg-0 me-1 ms-auto"><li class="nav-item">
-          <a class="nav-link" href="/about">
-            About
-          </a>
-        </li><li class="nav-item">
-          <a class="nav-link" href="/javascript">
-            JavaScript
-          </a>
-        </li><li class="nav-item">
-          <a class="nav-link" href="/nodejs">
-            Node.js
-          </a>
-        </li><li class="nav-item">
-  <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSettings" role="button"
-    aria-controls="offcanvasSettings">
-    <i class="fas fa-fw fa-sliders-h"></i> 设置
-  </a>
-</li>
-
-<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings"
-  aria-labelledby="offcanvasSettingsLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" w id="offcanvasSettingsLabel"><i class="fas fa-fw fa-sliders-h"></i> 设置</h5>
-    <a role="button" data-bs-dismiss="offcanvas" aria-label="Close">
-      <span class="fas fa-2x fa-fw fa-times"></span>
-    </a>
-  </div>
-  <div class="offcanvas-body"><section class="setting">
-  <form class="row">
-    <div class="col-auto">
-      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
-    </div>
-    <div class="col-auto ms-auto">
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="modeSwitcher">
-      </div>
-    </div>
-  </form>
-</section>
-<section class="setting">
-  <form class="font-size-switcher-form row">
-    <div class="col-auto">
-      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
-    </div>
-    <div class="col-auto ms-auto">
-      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
-    </div>
-  </form>
-</section>
-
-<section class="setting palettes">
-  <form class="row">
-    <div class="col-auto">
-      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
-    </div>
-    <div class="col-auto ms-auto">
-      <span id="btnPalette" class="btn btn-sm"><i class="fas fa-eye-dropper"></i></span>
-    </div>
-  </form>
-  <div class="container mt-2 visually-hidden" id="palettePicker">
-    <div class="btn-group"><button type="button" id="palette-blue" title="蓝色" 
-          class="btn btn-sm palette bg-blue d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-blue-gray" title="蓝灰色" 
-          class="btn btn-sm palette bg-blue-gray d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-brown" title="棕色" 
-          class="btn btn-sm palette bg-brown d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-cyan" title="青色" 
-          class="btn btn-sm palette bg-cyan d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-green" title="绿色" 
-          class="btn btn-sm palette bg-green d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-indigo" title="靛青色" 
-          class="btn btn-sm palette bg-indigo d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-orange" title="橙色" 
-          class="btn btn-sm palette bg-orange d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-pink" title="粉色" 
-          class="btn btn-sm palette bg-pink d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-purple" title="紫色" 
-          class="btn btn-sm palette bg-purple d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-red" title="红色" 
-          class="btn btn-sm palette bg-red d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-teal" title="蓝绿色" 
-          class="btn btn-sm palette bg-teal d-flex align-items-center justify-content-center">
-        </button><button type="button" id="palette-yellow" title="黄色" 
-          class="btn btn-sm palette bg-yellow d-flex align-items-center justify-content-center">
-        </button></button>
-    </div>
-  </div>
-</section></div>
-</div></ul>
-    </div>
-  </div>
-</nav>
-</header>
-<main role="main" class="container">
-      <div class="row content">
-<div class="col-lg-8">
-  <div class="container"><div class="posts mb-4"></div><div class="row table-responsive mb-3"></div>
-</div>
+<meta name="twitter:title" content="Boomsi&#39;s blog"/>
+<meta name="twitter:description" content="Front-end engineers interested in hackers."/>
 
 
-</div><aside class="col-lg-4 sidebar d-flex">
-  <div class="container"><section class="profile surface row text-center">
-  <div class="col-12 d-flex align-items-center justify-content-center">
-    <img class="profile-avatar rounded-circle" src="/images/profile.webp" alt="Bo Li" loading="lazy">
-  </div>
-  <div class="col-12">
-    <h5 class="profile-name my-2">Bo Li</h5><div class="profile-bio mb-2">Front End Developer.</div><div class="profile-meta"><span class="profile-company"><i class="fas fa-fw fa-building"></i>Secret</span><span class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Earth</span></div>
-  </div>
-</section><section class="recent-posts row surface">
-  <h4>最近文章</h4>
-  <ul></ul>
-</section></div>
-</aside>
-</div>
-    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav my-2 justify-content-center"><li class="nav-item">
-    <a class="nav-link social-link" href="mailto:libo19431@gmail.com" title="Email">
-      <i class="fas fa-fw fa-2x fa-envelope"></i>
-    </a>
-  </li><li class="nav-item">
-      <a class="nav-link social-link" target="_blank" href="https://github.com/boomsi" title="GitHub">
-        <i class="fa-fw fa-2x fab fa-github"></i>
-      </a>
-    </li><li class="nav-item">
-      <a class="nav-link social-link" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2747937285&amp;site=qq&amp;menu=yes" title="QQ">
-        <i class="fa-fw fa-2x fab fa-qq"></i>
-      </a>
-    </li><li class="nav-item">
-    <a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS">
-      <i class="fas fa-fw fa-2x fa-rss"></i>
-    </a>
-  </li></nav>
-<div class="copyright mb-2">
-  Copyright © 2021 - 2021 Bo Li. All Rights Reserved.
-</div>
-<div class="powered-by mb-2">
-  Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank">Bootstrap</a> theme.
-</div></footer>
-<a id="btnScrollToTop" class="btn-scroll-to-top">
-  <i class="fas fa-fw fa-chevron-circle-up fa-2x"></i>
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="https://boomsi.github.io/index.xml" title="Boomsi's blog" />
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://boomsi.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">Boomsi&#39;s blog</span>
+            <span class="logo__text"></span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
 </a>
-</body>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://boomsi.github.io/javascript">JavaScript</a></li><li><a href="https://boomsi.github.io/network">Network</a></li><li><a href="https://boomsi.github.io/issue">Issue</a></li><li><a href="https://boomsi.github.io/about">About</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+             
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+
+
+
+<main class="posts">
+    <h1>Just a blog for front end developer~</h1>
+
+    
+
+    <section class="timeline">
+      <div class="container" style="text-align: left!important">
+           
+    </div>
+</section>
+
+
+
+</main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://boomsi.github.io/">boomsi</a></span>
+            
+             
+        </div>
+    </div> 
+</footer>
+<script type="text/javascript">
+    $(function(){
+
+  window.sr = ScrollReveal();
+
+  if ($(window).width() < 768) {
+
+    if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+        $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+    }
+
+    sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  } else {
+    
+    sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  }
+  
+  sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+
+});
+
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+
+
+
+    </body>
 </html>
