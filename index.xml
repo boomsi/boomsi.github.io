@@ -9,24 +9,27 @@
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Fri, 06 Aug 2021 15:08:50 +0800</lastBuildDate><atom:link href="https://boomsi.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Es2021</title>
+      <title>ES 2020</title>
+      <link>https://boomsi.github.io/posts/es2020/</link>
+      <pubDate>Fri, 06 Aug 2021 15:08:50 +0800</pubDate>
+      
+      <guid>https://boomsi.github.io/posts/es2020/</guid>
+      <description>es2020</description>
+    </item>
+    
+    <item>
+      <title>ES 2021</title>
       <link>https://boomsi.github.io/posts/es2021/</link>
       <pubDate>Fri, 06 Aug 2021 15:08:50 +0800</pubDate>
       
       <guid>https://boomsi.github.io/posts/es2021/</guid>
-      <description>Features   逻辑赋值操作符（Logincal Assignment Operators）
-目前已经在 Stage 4 的阶段
- Example  // ||= a ||= b // babel 转译后 a || (a = b) // &amp;amp;&amp;amp;= a &amp;amp;&amp;amp;= b // babel 转译后 a &amp;amp;&amp;amp; (a = b); // ??= a ??= b // 转换成 ES2020 的写法，即 `a ?? (a = b)` // babel 转译后 (_a = a) !== null &amp;amp;&amp;amp; _a !== void 0 ? _a : a = b;   原文链接</description>
-    </item>
-    
-    <item>
-      <title>Es2021</title>
-      <link>https://boomsi.github.io/posts/json.stringify/</link>
-      <pubDate>Fri, 06 Aug 2021 15:08:50 +0800</pubDate>
-      
-      <guid>https://boomsi.github.io/posts/json.stringify/</guid>
-      <description>JSON.stringify( value [ , replacer [ , space ] ] ) Step:
-   </description>
+      <description>Features   数字分隔符(Numeric Separators)
+ Node v12.5.0+ @babel/plugin-proposal-numeric-separator  为提高数字的可读性而加入的新特性 经测试在十六进制、二进制也可使用
+&amp;lt;!-- 十进制 --&amp;gt; let decimal = 100_000_000_000 // 100000000000  &amp;lt;!-- 二进制 --&amp;gt; let binary = 0b1_1 // 3  &amp;lt;!-- 十六进制 --&amp;gt; let hex = 0xa_1 // 161   Promise.any()
+Node 15.0.0+
+Promise 静态方法目前四种 Promise.all() Promise.race() Promise.allSettled() Promise.any()
+简单来说
+ Promise.all() 所有 Promise 状态都 fulfilled ，才 resolve，否则 reject Promise.allSettled() 所有 Promise 状态均变更 (fulfilled|rejected) 才结束 Promise.race() 存在 Promise 状态变更 fulfilled|rejected，就 resolve|reject Promise.</description>
     </item>
     
   </channel>
