@@ -6,7 +6,7 @@
 
 
 
-<title>Es2021 | Boomsi&#39;s blog</title>
+<title>ES 2021 | Boomsi&#39;s blog</title>
 
 <link rel="stylesheet" href="https://boomsi.github.io//css/styles.css">
 
@@ -64,83 +64,108 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
 
 <div class="container">
   <h2 class="subtitle is-6">August 6, 2021</h2>
-  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Es2021</h1>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">ES 2021</h1>
   <div class="content">
     <h3 id="features">Features</h3>
 <ol>
 <li>
-<p>逻辑赋值操作符（Logincal Assignment Operators）</p>
-<p>目前已经在 <code>Stage 4</code> 的阶段</p>
-<ul>
-<li>Example</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// ||=
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">a</span> <span style="color:#f92672">||=</span> <span style="color:#a6e22e">b</span>
-<span style="color:#75715e">// babel 转译后
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">a</span> <span style="color:#f92672">||</span> (<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">b</span>)
-
-<span style="color:#75715e">// &amp;&amp;=
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">a</span> <span style="color:#f92672">&amp;&amp;=</span> <span style="color:#a6e22e">b</span>
-<span style="color:#75715e">// babel 转译后
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">a</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">b</span>);
-
-<span style="color:#75715e">// ??=
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">a</span> <span style="color:#f92672">??=</span> <span style="color:#a6e22e">b</span>
-<span style="color:#75715e">// 转换成 ES2020 的写法，即 `a ?? (a = b)`
-</span><span style="color:#75715e">// babel 转译后
-</span><span style="color:#75715e"></span>(<span style="color:#a6e22e">_a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">a</span>) <span style="color:#f92672">!==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_a</span> <span style="color:#f92672">!==</span> <span style="color:#66d9ef">void</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">_a</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">b</span>;
-</code></pre></div></li>
-</ol>
-<p><a href="https://github.com/tc39/proposal-logical-assignment">原文链接</a></p>
-<ol start="2">
-<li>
 <p>数字分隔符(Numeric Separators)</p>
-<blockquote>
-<p>This feature enables developers to make their numeric literals more readable by creating a visual separation between groups of digits. Large numeric literals are difficult for the human eye to parse quickly, especially when there are long digit repetitions. This impairs both the ability to get the correct value / order of magnitude&hellip;</p>
-</blockquote>
-<p>官方描述说了一大堆，我理解起来实际意思就是方便开发者阅读</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">num</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span><span style="color:#a6e22e">_345</span> <span style="color:#75715e">// 12345
+<ul>
+<li><code>Node v12.5.0+</code></li>
+<li><a href="https://babeljs.io/docs/en/babel-plugin-proposal-numeric-separator">@babel/plugin-proposal-numeric-separator</a></li>
+</ul>
+<p>为提高数字的可读性而加入的新特性
+经测试在十六进制、二进制也可使用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">&lt;!--</span> <span style="color:#a6e22e">十进制</span> <span style="color:#f92672">--&gt;</span>
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">decimal</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#a6e22e">_000_000_000</span> <span style="color:#75715e">// 100000000000
 </span><span style="color:#75715e"></span>
-<span style="color:#a6e22e">类似在</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">++</span> <span style="color:#a6e22e">中</span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">num</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span><span style="color:#e6db74">&#39;345&#39;</span><span style="color:#ae81ff">678</span>
+<span style="color:#75715e">&lt;!--</span> <span style="color:#a6e22e">二进制</span> <span style="color:#f92672">--&gt;</span>
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">binary</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0b1</span><span style="color:#a6e22e">_1</span>      <span style="color:#75715e">// 3
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">&lt;!--</span> <span style="color:#a6e22e">十六进制</span> <span style="color:#f92672">--&gt;</span>
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">hex</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xa</span><span style="color:#a6e22e">_1</span>         <span style="color:#75715e">// 161
+</span></code></pre></div></li>
+<li>
+<p>Promise.any()</p>
+<p><code>Node 15.0.0+</code></p>
+<p>Promise 静态方法目前四种 <code>Promise.all()</code> <code>Promise.race()</code> <code>Promise.allSettled()</code> <code>Promise.any()</code></p>
+<p>简单来说</p>
+<ul>
+<li><code>Promise.all()</code>
+所有 Promise 状态都 <code>fulfilled</code> ，才 <code>resolve</code>，否则 <code>reject</code></li>
+<li><code>Promise.allSettled()</code>
+所有 Promise 状态均变更 (<code>fulfilled|rejected</code>) 才结束</li>
+<li><code>Promise.race()</code>
+存在 Promise 状态变更 <code>fulfilled|rejected</code>，就 <code>resolve|reject</code></li>
+<li><code>Promise.any()</code>
+忽略 <code>rejected</code>，存在 Promise 状态变更为 <code>fulfilled</code>，就结束，如果全部 <code>rejected</code>，抛出 <code>AggregateError: All promises were rejected</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+        <span style="color:#a6e22e">reject</span>(<span style="color:#e6db74">&#39;err&#39;</span>)
+    }, <span style="color:#ae81ff">500</span>)
+})
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">delay1000</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+        <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;delay1000&#39;</span>)
+    }, <span style="color:#ae81ff">500</span>)
+})
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">delay2000</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+        <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;delay2000&#39;</span>)
+    }, <span style="color:#ae81ff">500</span>)
+})
+
+Promise.<span style="color:#a6e22e">all</span>([<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">delay1000</span>, <span style="color:#a6e22e">delay2000</span>])
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>))
+<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;err&#39;</span>
+Promise.<span style="color:#a6e22e">all</span>([<span style="color:#a6e22e">delay1000</span>, <span style="color:#a6e22e">delay2000</span>])
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>))
+<span style="color:#f92672">&gt;</span> [<span style="color:#e6db74">&#39;delay1000&#39;</span>, <span style="color:#e6db74">&#39;delay2000&#39;</span>]
+Promise.<span style="color:#a6e22e">allSettled</span>([<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">delay1000</span>, <span style="color:#a6e22e">delay2000</span>])
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>))
+<span style="color:#f92672">&gt;</span> [{ <span style="color:#e6db74">&#34;status&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;rejected&#34;</span>, <span style="color:#e6db74">&#34;reason&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;err&#34;</span> }, { <span style="color:#e6db74">&#34;status&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;fulfilled&#34;</span>, <span style="color:#e6db74">&#34;value&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1000</span> }, { <span style="color:#e6db74">&#34;status&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;fulfilled&#34;</span>, <span style="color:#e6db74">&#34;value&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2000</span> }]
+Promise.<span style="color:#a6e22e">race</span>([<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">delay1000</span>, <span style="color:#a6e22e">delay2000</span>])
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>))
+<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;err&#39;</span>
+Promise.<span style="color:#a6e22e">race</span>([<span style="color:#a6e22e">delay1000</span>, <span style="color:#a6e22e">delay2000</span>])
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>))
+<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;delay1000&#39;</span>
+Promise.<span style="color:#a6e22e">any</span>([<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">delay1000</span>, <span style="color:#a6e22e">delay2000</span>])
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>))
+<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;delay1000&#39;</span>
+Promise.<span style="color:#a6e22e">any</span>([<span style="color:#a6e22e">err</span>])
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>))
+<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;AggregateError: All promises were rejected&#39;</span>
+Promise.<span style="color:#a6e22e">any</span>([<span style="color:#a6e22e">err</span>])
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>))
+    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">errors</span>))
+<span style="color:#f92672">&gt;</span> [<span style="color:#e6db74">&#39;err&#39;</span>]
 </code></pre></div></li>
 <li>
-<p>Promise.any</p>
-<p>目前在 <code>Stage 4</code> 阶段</p>
-<p>Promise.any([&hellip;Promise])</p>
+<p>WeakRef and FinalizationRegistry</p>
 <ul>
-<li>存在任意一个 Promise was fulfilled，即会走到 then，所有 Promise 都 rejected 时在会被 catch 捕获，同时新增了一个 Error 子类 <code>AggregateError</code>，在catch捕获后会抛出 AggregateError</li>
-<li>每一个 <code>AggregateError</code> 都包含了指向异常的指针(Every AggregateError instance contains a pointer to an array of exceptions)</li>
+<li>
+<p>WeakRef 保留对另一对象的弱引用，不会阻止被引用对象被垃圾回收；相对的，一个普通的引用就是强引用，只有当该对象没有任何强引用时，JavaScript 引擎才会销毁该对象并回收该对象所占用的内存空间；而在该对象被垃圾回收之后，就无法通过弱引用来获取该对象。</p>
+</li>
+<li>
+<p>FinalizationRegistry 当一个在注册表中注册的对象被垃圾回收时，请求在某个时间点上调用一个清理回调</p>
+</li>
 </ul>
-<p>Example</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fn1</span> <span style="color:#f92672">=</span> () =&gt; 
-    <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; 
-        <span style="color:#a6e22e">setTimeout</span>(() =&gt; 
-            <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;ok&#39;</span>)
-        , <span style="color:#ae81ff">2000</span>))
-   
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fn2</span> <span style="color:#f92672">=</span> () =&gt; 
-    <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; 
-        <span style="color:#a6e22e">setTimeout</span>(() =&gt; 
-            <span style="color:#a6e22e">reject</span>(<span style="color:#e6db74">&#39;fail&#39;</span>)
-        , <span style="color:#ae81ff">1000</span>))
-   
-Promise.<span style="color:#a6e22e">any</span>([<span style="color:#a6e22e">fn1</span>(), <span style="color:#a6e22e">fn2</span>()])
-    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; {<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>, <span style="color:#e6db74">&#39;res&#39;</span>)})
-    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; {<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#39;err&#39;</span>)})
-<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">ok</span> <span style="color:#a6e22e">res</span>
-
-Promise.<span style="color:#a6e22e">any</span>([<span style="color:#a6e22e">fn2</span>(), <span style="color:#a6e22e">fn2</span>()])
-    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; {<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>, <span style="color:#e6db74">&#39;res&#39;</span>)})
-    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">err</span> =&gt; {<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#39;err&#39;</span>)})
-<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">AggregateError</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">All</span> <span style="color:#a6e22e">promises</span> <span style="color:#a6e22e">were</span> <span style="color:#a6e22e">rejected</span> <span style="color:#e6db74">&#34;err&#34;</span>
-</code></pre></div><p><a href="https://github.com/tc39/proposal-promise-any">原文链接</a></p>
+<p>使用场景暂未遇到
+参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WeakRef">MDN</a></p>
 </li>
 <li>
 <p>String.prototype.replaceAll</p>
-<p>同样在 <code>Stage 4</code> 阶段</p>
+<p><code>Node 15.0.0+</code></p>
 <p>使用上同 String.prototype.replace，也不会改变原字符，不同之处在于会对目标字符串所有匹配的关键词做替换，原来基本上都是使用正则匹配，即 <code>str.replace(/xxx/g, 'xxx')</code></p>
-<p>Example</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;abcadeafga&#39;</span>
 <span style="color:#75715e">//在这之前是这样处理
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/a/g</span>, <span style="color:#e6db74">&#39;1&#39;</span>)
@@ -154,19 +179,37 @@ Promise.<span style="color:#a6e22e">any</span>([<span style="color:#a6e22e">fn2<
 </code></pre></div><blockquote>
 <p>需要注意的一点是 <code>replaceAll</code> 的第一个参数如果是正则需要加 <code>g</code></p>
 </blockquote>
-</li>
+<p><strong>例外</strong>
+当替换值为 <code>$$</code>, <code>$&amp;</code>, <code>$\``, </code>and $'` 时，替换后的结果可能并不是我们需要的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#e6db74">&#39;apple&#39;</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;$$&#39;</span>)
+<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;$pple&#39;</span>
+</code></pre></div><p>这时可以将函数第二个参数，返回值为想要替换成的值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#e6db74">&#39;apple&#39;</span>.<span style="color:#a6e22e">replaceAll</span>(<span style="color:#e6db74">&#39;a&#39;</span>, () =&gt; <span style="color:#e6db74">&#39;$$&#39;</span>)
+<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#34;$$pple&#34;</span>
+</code></pre></div></li>
 <li>
-<p>WeakRef and FinalizationRegistry</p>
-</li>
+<p>逻辑赋值操作符（Logincal Assignment Operators）</p>
+<p><code>Node 15.0.0+</code></p>
+<ol>
+<li><code>||=</code></li>
 </ol>
-<ul>
-<li>
-<p>WeakRef 保留对另一对象的弱引用，不会阻止被引用对象被垃圾回收；相对的，一个普通的引用就是强引用，只有当该对象没有任何强引用时，JavaScript 引擎才会销毁该对象并回收该对象所占用的内存空间；而在该对象被垃圾回收之后，就无法通过弱引用来获取该对象。</p>
-</li>
-<li>
-<p>FinalizationRegistry 当一个在注册表中注册的对象被垃圾回收时，请求在某个时间点上调用一个清理回调</p>
-</li>
-</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">a</span> <span style="color:#f92672">||=</span> <span style="color:#a6e22e">b</span>
+<span style="color:#75715e">/** babel 转译后 **/</span>
+<span style="color:#a6e22e">a</span> <span style="color:#f92672">||</span> (<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">b</span>)
+</code></pre></div><ol start="2">
+<li><code>&amp;&amp;=</code></li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">a</span> <span style="color:#f92672">&amp;&amp;=</span> <span style="color:#a6e22e">b</span>
+<span style="color:#75715e">/** babel 转译后 **/</span>
+<span style="color:#a6e22e">a</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">b</span>);
+</code></pre></div><ol start="3">
+<li><code>??=</code></li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">a</span> <span style="color:#f92672">??=</span> <span style="color:#a6e22e">b</span> <span style="color:#75715e">// 转换成 ES2020 的写法，即 `a ?? (a = b)`
+</span><span style="color:#75715e"></span><span style="color:#75715e">/** babel 转译后 **/</span>
+(<span style="color:#a6e22e">_a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">a</span>) <span style="color:#f92672">!==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_a</span> <span style="color:#f92672">!==</span> <span style="color:#66d9ef">void</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">_a</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">b</span>;
+</code></pre></div></li>
+</ol>
 
   </div>
 </div>
