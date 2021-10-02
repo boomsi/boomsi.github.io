@@ -14,12 +14,7 @@
       <pubDate>Fri, 06 Aug 2021 15:08:50 +0800</pubDate>
       
       <guid>https://boomsi.github.io/posts/es2020/</guid>
-      <description>Denamic import()
-Node 13.2.0+ @babel/plugin-syntax-dynamic-import
-在这之前使用 ES6 module 导入模块，都是在文件顶部 import xxx from &#39;xxx&#39;，这样带来的好处有很多，譬如
- 做静态语法分析 tree-shaking  但是在某些场景，一些特性又是很有用的，这些在静态导入场景没有办法实现
- 有选择性的 import 从脚本中作为模块导入 延迟加载  现在它支持动态调用了&amp;hellip;譬如
-if (val) { import(&amp;#34;lodash&amp;#34;).then(({ default: _ }) =&amp;gt; { console.log(_.get(val, &amp;#34;a&amp;#34;)); }); } &amp;lt;!-- async 方式 --&amp;gt; async () =&amp;gt; { if (val) { const { default: _ } = await import(&amp;#34;lodash&amp;#34;); console.log(_.get(val, &amp;#34;a&amp;#34;)); } }  虽然 import() 看起来像函数调用，但是在语法意义上更像是 super()，因此 import 并不继承自 Function.</description>
+      <description>es2020</description>
     </item>
     
     <item>
