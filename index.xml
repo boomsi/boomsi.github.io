@@ -9,12 +9,12 @@
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Wed, 02 Mar 2022 14:09:09 +0800</lastBuildDate><atom:link href="https://boomsi.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Webcomponent使用经验</title>
-      <link>https://boomsi.github.io/posts/webcomponent%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C/</link>
+      <title>Web Component 踩坑记</title>
+      <link>https://boomsi.github.io/posts/webcomponent/</link>
       <pubDate>Wed, 02 Mar 2022 14:09:09 +0800</pubDate>
       
-      <guid>https://boomsi.github.io/posts/webcomponent%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C/</guid>
-      <description>已下是一个简单的 web component
+      <guid>https://boomsi.github.io/posts/webcomponent/</guid>
+      <description>以下是一个简单的 web component
 &amp;lt;demo-component&amp;gt;&amp;lt;/demo-component&amp;gt; &amp;lt;template id=&amp;#39;demo-component&amp;#39;&amp;gt; &amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; &amp;lt;div&amp;gt; Web Component &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; window.customElements.define(&amp;#39;demo-component&amp;#39;, class extends HTMLElement { constructor() { super() const shadow = this.attachShadow({mode: &amp;#39;closed&amp;#39;}) const target = document.getElementById(&amp;#39;demo-component&amp;#39;) const content = target.content.cloneNode(true) shadow.appendChild(content) } }) &amp;lt;/script&amp;gt; 但是通常在实际场景中，作为 component 肯定是要可抽象复用，由此带来的一个场景是我们在复用 components 的同时，也要通过一个接口（例如 React props）传入数据来显示不同数据。官方也提供了两种不同的方式 attribute &amp;amp; slot
 以下是通过 attribute 实现，引用 component 时通过设置 attribute 方式传递数据，在实例化类中通过 this.getAttributes 获取设置的 attribute，带来的问题是会将数据都放在标签属性上。如果是数据是一个列表，则需要 decodeURI/encodeURI，过长的 attribute 对页面也不太友好
 &amp;lt;demo-component demo-attr=&amp;#39;Web Component&amp;#39;&amp;gt;&amp;lt;/demo-component&amp;gt; &amp;lt;template id=&amp;#39;demo-component&amp;#39;&amp;gt; &amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; &amp;lt;div id=&amp;#39;demo-attr&amp;#39;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; window.</description>
