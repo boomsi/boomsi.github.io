@@ -7,7 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Wed, 02 Mar 2022 14:09:09 +0800</lastBuildDate><atom:link href="https://boomsi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Jul 2022 14:48:25 +0800</lastBuildDate><atom:link href="https://boomsi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ES 2022</title>
+      <link>https://boomsi.github.io/posts/es2022/</link>
+      <pubDate>Tue, 05 Jul 2022 14:48:25 +0800</pubDate>
+      
+      <guid>https://boomsi.github.io/posts/es2022/</guid>
+      <description>Features  .at() 方法，为可索引类新增  可以理解为根据索引取值，当参数为负数时会按照倒序从末尾开始取值，例如
+const list = [4, 5, 6, 7, 8] list.at(1) // 5 list.at(-1) // 8  const str = &amp;#39;abcdefg&amp;#39; str.at(-2) // f polyfill
+function at(n = 0) { n = Math.trunc(n) if (n &amp;lt; 0) n += this.length; if (n &amp;lt; 0 || n &amp;gt;= this.length) return undefined; return this[n]; } 正则新增参数 d，用以在使用 .exec() 时提供匹配信息  主要使用场景应该是用正则匹配分组后能够拿到匹配的索引段，然后对原字符串操作
+const re1 = /a+(?&amp;lt;Z&amp;gt;z)?/d; const s1 = &amp;#34;xaaaz&amp;#34;; const m1 = re1.</description>
+    </item>
+    
     <item>
       <title>Web Component 踩坑记</title>
       <link>https://boomsi.github.io/posts/webcomponent/</link>
