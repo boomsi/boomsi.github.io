@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>一次失败的 WebAssembly 尝试 | Boomsi&#39;s blog</title>
+
+<link rel="stylesheet" href="https://boomsi.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://boomsi.github.io//js/highlight.js"></script>
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://boomsi.github.io/"><h1 class="title is-3">Boomsi&#39;s blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://boomsi.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/boomsi" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.linkedin.com/in/natarajmb/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-linkedin-in"></i>
+                  </span>
+                </a>
+              
+                <a href="https://twitter.com/natarajmb" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">
+    Create: August 14, 2024
+    <br />
+    Last Modify: Aug 14, 2024
+  </h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">一次失败的 WebAssembly 尝试</h1>
+  <div class="content">
+    <p>背景：
+项目中有一个非常耗时的操作，扩大选区，即找到图片边缘的部分，以边缘的每个点为圆心画圆，以此平滑扩大选区；但是随着选区变大，带来的耗时非常恐怖，大到200+ms；
+遂尝试用 WebAssembly 试试，看看耗时能否降低。</p>
+<p>尝试：</p>
+<p>用 go 重写了这块代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">jsProcess</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">FuncOf</span>(<span style="color:#a6e22e">Process</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Global</span>().<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;process&#34;</span>, <span style="color:#a6e22e">jsProcess</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">jsProcess</span>.<span style="color:#a6e22e">Release</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">select</span> {}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">process</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">data</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">img</span>  <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Process</span>(<span style="color:#a6e22e">this</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">args</span> []<span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>) <span style="color:#66d9ef">interface</span>{} {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">imgSrc</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">storkeWidth</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">jsCallback</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">storkeWidth</span>.<span style="color:#a6e22e">Int</span>() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#a6e22e">process</span>{<span style="color:#a6e22e">data</span>: <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#66d9ef">nil</span>), <span style="color:#a6e22e">img</span>: <span style="color:#a6e22e">imgSrc</span>})
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">document</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Global</span>().<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;document&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">canvas</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">document</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;createElement&#34;</span>, <span style="color:#e6db74">&#34;canvas&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;getContext&#34;</span>, <span style="color:#e6db74">&#34;2d&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fillColor</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#e6db74">&#34;rgba(116, 90, 241, .5)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">img</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">document</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;createElement&#34;</span>, <span style="color:#e6db74">&#34;img&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;crossorigin&#34;</span>, <span style="color:#e6db74">&#34;anonymous&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;src&#34;</span>, <span style="color:#a6e22e">imgSrc</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">onloadCallback</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Func</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">onloadCallback</span> = <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">FuncOf</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">this</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">_</span> []<span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>) <span style="color:#66d9ef">interface</span>{} {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;width&#34;</span>, <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;width&#34;</span>))
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;height&#34;</span>, <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;height&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;drawImage&#34;</span>, <span style="color:#a6e22e">img</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">imageData</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;getImageData&#34;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;width&#34;</span>).<span style="color:#a6e22e">Int</span>(), <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;height&#34;</span>).<span style="color:#a6e22e">Int</span>())
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">data</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">imageData</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;data&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">boundaries</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int</span>{}
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">length</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;length&#34;</span>).<span style="color:#a6e22e">Int</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// tag1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">4</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">Index</span>(<span style="color:#a6e22e">i</span><span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>).<span style="color:#a6e22e">Int</span>() <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">boundaries</span> = append(<span style="color:#a6e22e">boundaries</span>, <span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// tag1 end
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">minX</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">imageData</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;width&#34;</span>).<span style="color:#a6e22e">Int</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">maxX</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">maxY</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">w</span> = <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;width&#34;</span>).<span style="color:#a6e22e">Int</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// tag2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">boundaries</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> (<span style="color:#a6e22e">v</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">4</span>) <span style="color:#f92672">%</span> <span style="color:#a6e22e">w</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">y</span> <span style="color:#f92672">:=</span> (<span style="color:#a6e22e">v</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">w</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">x</span> &lt; <span style="color:#a6e22e">minX</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">minX</span> = <span style="color:#a6e22e">x</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">x</span> &gt; <span style="color:#a6e22e">maxX</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">maxX</span> = <span style="color:#a6e22e">x</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">y</span> &gt; <span style="color:#a6e22e">maxY</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">maxY</span> = <span style="color:#a6e22e">y</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">FillCriclePath</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#a6e22e">x</span>), <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#a6e22e">y</span>), <span style="color:#a6e22e">storkeWidth</span>, <span style="color:#a6e22e">fillColor</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// tag2 end
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">newImageData</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;getImageData&#34;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;width&#34;</span>).<span style="color:#a6e22e">Int</span>(), <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;height&#34;</span>).<span style="color:#a6e22e">Int</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">res</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">process</span>{<span style="color:#a6e22e">data</span>: <span style="color:#a6e22e">newImageData</span>, <span style="color:#a6e22e">img</span>: <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;toDataURL&#34;</span>)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">resMap</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}{
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;data&#34;</span>: <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">data</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;img&#34;</span>:  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">img</span>,
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">jsCallback</span>.<span style="color:#a6e22e">Invoke</span>(<span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#a6e22e">resMap</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">onloadCallback</span>.<span style="color:#a6e22e">Release</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;onload&#34;</span>, <span style="color:#a6e22e">onloadCallback</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FillCriclePath</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">x</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">y</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">N</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">color</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>) <span style="color:#66d9ef">interface</span>{} {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">path</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">GetCriclePath</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">N</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;fillStyle&#34;</span>, <span style="color:#a6e22e">color</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;fill&#34;</span>, <span style="color:#a6e22e">path</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetCriclePath</span>(<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">y</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>, <span style="color:#a6e22e">radius</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Value</span>) <span style="color:#66d9ef">interface</span>{} {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">path</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Global</span>().<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;Path2D&#34;</span>).<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#e6db74">&#34;arc&#34;</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">radius</span>, <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#ae81ff">0</span>), <span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">Global</span>().<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;Math&#34;</span>).<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;PI&#34;</span>).<span style="color:#a6e22e">Float</span>()<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">path</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>然后编译成wasm</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>GOOS<span style="color:#f92672">=</span>js GOARCH<span style="color:#f92672">=</span>wasm go build -o process.wasm
+</span></span></code></pre></div><p>然后满怀期待的放到js中</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">go</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Go</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">instantiateStreaming</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/public/assets/main.wasm&#39;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">go</span>.<span style="color:#a6e22e">importObject</span>
+</span></span><span style="display:flex;"><span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">go</span>.<span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">instance</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>一看耗时</p>
+<p><img src="image-3.png" alt="wasm 耗时"></p>
+<p>再看原 js 耗时</p>
+<p><img src="image-1.png" alt="js 耗时"></p>
+<p><code>:)</code></p>
+<p>在go中加了时间同级，主要耗时点在 tag1 和 tag2 中；tag2 很耗时也好理解，每个循环都要操作dom画圆，但是 tag1 耗时就堪比 js 整个逻辑操作了，就很难理解</p>
+<p><img src="image.png" alt="tag1 耗时"></p>
+<p>待我找找答案</p>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2019</p>
+  </div>
+</section>
+
