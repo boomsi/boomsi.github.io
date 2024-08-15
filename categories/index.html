@@ -1,5 +1,5 @@
 
-<script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><div class="container">
+<div class="container">
   <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 
 <title>Categories | Boomsi&#39;s blog</title>
 
-<link rel="stylesheet" href="http://localhost:1313//css/styles.css">
+<link rel="stylesheet" href="https://boomsi.github.io//css/styles.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
 integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -20,7 +20,7 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<script src="http://localhost:1313//js/highlight.js"></script>
+<script src="https://boomsi.github.io//js/highlight.js"></script>
 
 
 
@@ -30,12 +30,12 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
   <div class="container">
     <nav class="navbar level">
       <div class="navbar-brand">
-          <a class="nav-item" href="http://localhost:1313/"><h1 class="title is-3">Boomsi&#39;s blog</h1></a>
+          <a class="nav-item" href="https://boomsi.github.io/"><h1 class="title is-3">Boomsi&#39;s blog</h1></a>
       </div>           
       <div class="navbar-menu has-text-centered is-active">
           <div class="navbar-end is-centered">
               
-                <a href="http://localhost:1313/about" rel="me">
+                <a href="https://boomsi.github.io/about" rel="me">
                   <span class="icon">
                     <i class="fas fa-info"></i>
                   </span>
@@ -74,7 +74,7 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
           <h6 class="is-inline" style="white-space: nowrap">Aug 14</h2>
         </div>
         <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="http://localhost:1313/posts/webassembly/">一次失败的 WebAssembly 尝试</a></h1>
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://boomsi.github.io/posts/webassembly/">一次失败的 WebAssembly 尝试</a></h1>
           <div class="content is-hidden-mobile">
             背景： 项目中有一个非常耗时的操作，扩大选区，即找到图片边缘的部分，以边缘的每个点为圆心画圆，以此平滑扩大选区；但是随着选区变大，带来的耗时非常恐怖，大到200+ms； 遂尝试用 WebAssembly 试试，看看耗时能否降低。
 尝试：
@@ -82,7 +82,7 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
 func main() { jsProcess := js.FuncOf(Process) js.Global().Set(&#34;process&#34;, jsProcess) defer jsProcess.Release() select {} } type process struct { data js.Value img js.Value } func Process(this js.Value, args []js.Value) interface{} { imgSrc := args[0] …
             
             <br>
-            <a class="button is-marginless is-paddingless" href="http://localhost:1313/posts/webassembly/">
+            <a class="button is-marginless is-paddingless" href="https://boomsi.github.io/posts/webassembly/">
             <span class="icon-link is-small" style="line-height: 100%">
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
               </span>
@@ -100,7 +100,7 @@ func main() { jsProcess := js.FuncOf(Process) js.Global().Set(&#34;process&#34;,
           <h6 class="is-inline" style="white-space: nowrap">Jul 5</h2>
         </div>
         <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="http://localhost:1313/posts/es2022/">ES 2022</a></h1>
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://boomsi.github.io/posts/es2022/">ES 2022</a></h1>
           <div class="content is-hidden-mobile">
             Features .at() 方法，为可索引类新增 可以理解为根据索引取值，当参数为负数时会按照倒序从末尾开始取值，例如
 const list = [4, 5, 6, 7, 8] list.at(1) // 5 list.at(-1) // 8 const str = &#39;abcdefg&#39; str.at(-2) // f polyfill
@@ -108,7 +108,7 @@ function at(n = 0) { n = Math.trunc(n) if (n &lt; 0) n += this.length; if (n &lt
 const re1 …
             
             <br>
-            <a class="button is-marginless is-paddingless" href="http://localhost:1313/posts/es2022/">
+            <a class="button is-marginless is-paddingless" href="https://boomsi.github.io/posts/es2022/">
             <span class="icon-link is-small" style="line-height: 100%">
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
               </span>
@@ -123,13 +123,13 @@ const re1 …
           <h6 class="is-inline" style="white-space: nowrap">Mar 2</h2>
         </div>
         <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="http://localhost:1313/posts/webcomponent/">Web Component 踩坑记</a></h1>
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://boomsi.github.io/posts/webcomponent/">Web Component 踩坑记</a></h1>
           <div class="content is-hidden-mobile">
             以下是一个简单的 web component
 &lt;demo-component&gt;&lt;/demo-component&gt; &lt;template id=&#39;demo-component&#39;&gt; &lt;style&gt;&lt;/style&gt; &lt;div&gt; Web Component &lt;/div&gt; &lt;/template&gt; &lt;script&gt; window.customElements.define(&#39;demo-component&#39;, class extends HTMLElement { constructor() { super() const shadow = this.attachShadow({mode: &#39;closed&#39;}) const target = …
             
             <br>
-            <a class="button is-marginless is-paddingless" href="http://localhost:1313/posts/webcomponent/">
+            <a class="button is-marginless is-paddingless" href="https://boomsi.github.io/posts/webcomponent/">
             <span class="icon-link is-small" style="line-height: 100%">
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
               </span>
@@ -147,7 +147,7 @@ const re1 …
           <h6 class="is-inline" style="white-space: nowrap">Aug 6</h2>
         </div>
         <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="http://localhost:1313/posts/es2021/">ES 2021</a></h1>
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://boomsi.github.io/posts/es2021/">ES 2021</a></h1>
           <div class="content is-hidden-mobile">
             Features 数字分隔符(Numeric Separators)
 Node v12.5.0+ @babel/plugin-proposal-numeric-separator 为提高数字的可读性而加入的新特性 经测试在十六进制、二进制也可使用
@@ -156,7 +156,7 @@ Node 15.0.0+
 Promise 静态方法目前四种 Promise.all() Promise.race() Promise.allSettled() Promise.any() …
             
             <br>
-            <a class="button is-marginless is-paddingless" href="http://localhost:1313/posts/es2021/">
+            <a class="button is-marginless is-paddingless" href="https://boomsi.github.io/posts/es2021/">
             <span class="icon-link is-small" style="line-height: 100%">
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
               </span>
@@ -171,7 +171,7 @@ Promise 静态方法目前四种 Promise.all() Promise.race() Promise.allSettled
           <h6 class="is-inline" style="white-space: nowrap">Aug 6</h2>
         </div>
         <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="http://localhost:1313/posts/es2020/">ES 2020</a></h1>
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://boomsi.github.io/posts/es2020/">ES 2020</a></h1>
           <div class="content is-hidden-mobile">
             Denamic import()
 Node 13.2.0+ @babel/plugin-syntax-dynamic-import
@@ -181,7 +181,7 @@ Node 13.2.0+ @babel/plugin-syntax-dynamic-import
 if (val) { import(&#34;lodash&#34;).then(({ default: _ }) =&gt; { console.log(_.get(val, &#34;a&#34;)); }); } &lt;!-- async 方式 --&gt; async () =&gt; { if (val) …
             
             <br>
-            <a class="button is-marginless is-paddingless" href="http://localhost:1313/posts/es2020/">
+            <a class="button is-marginless is-paddingless" href="https://boomsi.github.io/posts/es2020/">
             <span class="icon-link is-small" style="line-height: 100%">
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
               </span>

@@ -2,32 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://boomsi.github.io/</loc>
     <lastmod>2024-08-14T06:01:21+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://boomsi.github.io/posts/</loc>
     <lastmod>2024-08-14T06:01:21+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/webassembly/</loc>
+    <loc>https://boomsi.github.io/posts/webassembly/</loc>
     <lastmod>2024-08-14T06:01:21+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/es2022/</loc>
+    <loc>https://boomsi.github.io/posts/es2022/</loc>
     <lastmod>2022-07-14T10:53:13+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/webcomponent/</loc>
+    <loc>https://boomsi.github.io/posts/webcomponent/</loc>
     <lastmod>2022-03-02T14:09:09+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/es2020/</loc>
+    <loc>https://boomsi.github.io/posts/es2020/</loc>
     <lastmod>2021-10-14T07:14:56+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/es2021/</loc>
+    <loc>https://boomsi.github.io/posts/es2021/</loc>
     <lastmod>2021-10-14T07:14:56+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://boomsi.github.io/about/</loc>
     <lastmod>2021-06-24T23:37:41+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://boomsi.github.io/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://boomsi.github.io/tags/</loc>
   </url>
 </urlset>
