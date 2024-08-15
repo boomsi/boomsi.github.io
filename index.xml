@@ -2,46 +2,46 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Boomsi&#39;s blog</title>
-    <link>https://boomsi.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Boomsi&#39;s blog</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Wed, 14 Aug 2024 06:01:21 +0000</lastBuildDate>
-    <atom:link href="https://boomsi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>一次失败的 WebAssembly 尝试</title>
-      <link>https://boomsi.github.io/posts/webassembly/</link>
+      <link>http://localhost:1313/posts/webassembly/</link>
       <pubDate>Wed, 14 Aug 2024 11:32:47 +0800</pubDate>
-      <guid>https://boomsi.github.io/posts/webassembly/</guid>
+      <guid>http://localhost:1313/posts/webassembly/</guid>
       <description>背景： 项目中有一个非常耗时的操作，扩大选区，即找到图片边缘的部分，以边缘的每个点为圆心画圆，以此平滑扩大选区；但是随着选区变大，带来的耗时非常恐怖，大到200+ms； 遂尝试用 WebAssembly 试试，看看耗时能否降低。&#xA;尝试：&#xA;用 go 重写了这块代码&#xA;func main() { jsProcess := js.FuncOf(Process) js.Global().Set(&amp;#34;process&amp;#34;, jsProcess) defer jsProcess.Release() select {} } type process struct { data js.Value img js.Value } func Process(this js.Value, args []js.Value) interface{} { imgSrc := args[0] storkeWidth := args[1] jsCallback := args[2] if storkeWidth.Int() == 0 { return js.ValueOf(process{data: js.ValueOf(nil), img: imgSrc}) } document := js.Global().Get(&amp;#34;document&amp;#34;) canvas := document.Call(&amp;#34;createElement&amp;#34;, &amp;#34;canvas&amp;#34;) ctx := canvas.Call(&amp;#34;getContext&amp;#34;, &amp;#34;2d&amp;#34;) fillColor := js.</description>
     </item>
     <item>
       <title>ES 2022</title>
-      <link>https://boomsi.github.io/posts/es2022/</link>
+      <link>http://localhost:1313/posts/es2022/</link>
       <pubDate>Tue, 05 Jul 2022 14:48:25 +0800</pubDate>
-      <guid>https://boomsi.github.io/posts/es2022/</guid>
+      <guid>http://localhost:1313/posts/es2022/</guid>
       <description>Features .at() 方法，为可索引类新增 可以理解为根据索引取值，当参数为负数时会按照倒序从末尾开始取值，例如&#xA;const list = [4, 5, 6, 7, 8] list.at(1) // 5 list.at(-1) // 8 const str = &amp;#39;abcdefg&amp;#39; str.at(-2) // f polyfill&#xA;function at(n = 0) { n = Math.trunc(n) if (n &amp;lt; 0) n += this.length; if (n &amp;lt; 0 || n &amp;gt;= this.length) return undefined; return this[n]; } 正则新增参数 d，用以在使用 .exec() 时提供匹配信息 主要使用场景应该是用正则匹配分组后能够拿到匹配的索引段，然后对原字符串操作&#xA;const re1 = /a+(?&amp;lt;Z&amp;gt;z)?/d; const s1 = &amp;#34;xaaaz&amp;#34;; const m1 = re1.</description>
     </item>
     <item>
       <title>Web Component 踩坑记</title>
-      <link>https://boomsi.github.io/posts/webcomponent/</link>
+      <link>http://localhost:1313/posts/webcomponent/</link>
       <pubDate>Wed, 02 Mar 2022 14:09:09 +0800</pubDate>
-      <guid>https://boomsi.github.io/posts/webcomponent/</guid>
+      <guid>http://localhost:1313/posts/webcomponent/</guid>
       <description>以下是一个简单的 web component&#xA;&amp;lt;demo-component&amp;gt;&amp;lt;/demo-component&amp;gt; &amp;lt;template id=&amp;#39;demo-component&amp;#39;&amp;gt; &amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; &amp;lt;div&amp;gt; Web Component &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; window.customElements.define(&amp;#39;demo-component&amp;#39;, class extends HTMLElement { constructor() { super() const shadow = this.attachShadow({mode: &amp;#39;closed&amp;#39;}) const target = document.getElementById(&amp;#39;demo-component&amp;#39;) const content = target.content.cloneNode(true) shadow.appendChild(content) } }) &amp;lt;/script&amp;gt; 但是通常在实际场景中，作为 component 肯定是要可抽象复用，由此带来的一个场景是我们在复用 components 的同时，也要通过一个接口（例如 React props）传入数据来显示不同数据。官方也提供了两种不同的方式 attribute &amp;amp; slot&#xA;以下是通过 attribute 实现，引用 component 时通过设置 attribute 方式传递数据，在实例化类中通过 this.getAttributes 获取设置的 attribute，带来的问题是会将数据都放在标签属性上。如果是数据是一个列表，则需要 decodeURI/encodeURI，过长的 attribute 对页面也不太友好&#xA;&amp;lt;demo-component demo-attr=&amp;#39;Web Component&amp;#39;&amp;gt;&amp;lt;/demo-component&amp;gt; &amp;lt;template id=&amp;#39;demo-component&amp;#39;&amp;gt; &amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; &amp;lt;div id=&amp;#39;demo-attr&amp;#39;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; window.</description>
     </item>
     <item>
       <title>ES 2020</title>
-      <link>https://boomsi.github.io/posts/es2020/</link>
+      <link>http://localhost:1313/posts/es2020/</link>
       <pubDate>Fri, 06 Aug 2021 15:08:50 +0800</pubDate>
-      <guid>https://boomsi.github.io/posts/es2020/</guid>
+      <guid>http://localhost:1313/posts/es2020/</guid>
       <description>Denamic import()&#xA;Node 13.2.0+ @babel/plugin-syntax-dynamic-import&#xA;在这之前使用 ES6 module 导入模块，都是在文件顶部 import xxx from &#39;xxx&#39;，这样带来的好处有很多，譬如&#xA;做静态语法分析 tree-shaking 但是在某些场景，一些特性又是很有用的，这些在静态导入场景没有办法实现&#xA;有选择性的 import 从脚本中作为模块导入 延迟加载 现在它支持动态调用了&amp;hellip;譬如&#xA;if (val) { import(&amp;#34;lodash&amp;#34;).then(({ default: _ }) =&amp;gt; { console.log(_.get(val, &amp;#34;a&amp;#34;)); }); } &amp;lt;!-- async 方式 --&amp;gt; async () =&amp;gt; { if (val) { const { default: _ } = await import(&amp;#34;lodash&amp;#34;); console.log(_.get(val, &amp;#34;a&amp;#34;)); } } 虽然 import() 看起来像函数调用，但是在语法意义上更像是 super()，因此 import 并不继承自 Function.prototype，不存在 call、apply、bind方法，此外将 import 赋值给变量也是无效的&#xA;BitInt&#xA;BitInt 作为新增的原始数据类型（在这之前有6种: String, Number, Boolean, undefined, Object, Symbol），为了解决 JavaScript 中 Number 在范围（Number.</description>
     </item>
     <item>
       <title>ES 2021</title>
-      <link>https://boomsi.github.io/posts/es2021/</link>
+      <link>http://localhost:1313/posts/es2021/</link>
       <pubDate>Fri, 06 Aug 2021 15:08:50 +0800</pubDate>
-      <guid>https://boomsi.github.io/posts/es2021/</guid>
+      <guid>http://localhost:1313/posts/es2021/</guid>
       <description>Features 数字分隔符(Numeric Separators)&#xA;Node v12.5.0+ @babel/plugin-proposal-numeric-separator 为提高数字的可读性而加入的新特性 经测试在十六进制、二进制也可使用&#xA;&amp;lt;!-- 十进制 --&amp;gt; let decimal = 100_000_000_000 // 100000000000 &amp;lt;!-- 二进制 --&amp;gt; let binary = 0b1_1 // 3 &amp;lt;!-- 十六进制 --&amp;gt; let hex = 0xa_1 // 161 Promise.any()&#xA;Node 15.0.0+&#xA;Promise 静态方法目前四种 Promise.all() Promise.race() Promise.allSettled() Promise.any()&#xA;简单来说&#xA;Promise.all() 所有 Promise 状态都 fulfilled ，才 resolve，否则 reject Promise.allSettled() 所有 Promise 状态均变更 (fulfilled|rejected) 才结束 Promise.race() 存在 Promise 状态变更 fulfilled|rejected，就 resolve|reject Promise.any() 忽略 rejected，存在 Promise 状态变更为 fulfilled，就结束，如果全部 rejected，抛出 AggregateError: All promises were rejected const err = new Promise((resolve, reject) =&amp;gt; { setTimeout(() =&amp;gt; { reject(&amp;#39;err&amp;#39;) }, 500) }) const delay1000 = new Promise((resolve, reject) =&amp;gt; { setTimeout(() =&amp;gt; { resolve(&amp;#39;delay1000&amp;#39;) }, 500) }) const delay2000 = new Promise((resolve, reject) =&amp;gt; { setTimeout(() =&amp;gt; { resolve(&amp;#39;delay2000&amp;#39;) }, 500) }) Promise.</description>
     </item>
   </channel>
